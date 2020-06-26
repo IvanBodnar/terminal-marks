@@ -1,11 +1,13 @@
+from os import getcwd
 from pathlib import Path
-from typing import Union
+from typing import Union, Callable
 
 
 class Input:
-    def __init__(self):
+    def __init__(self, cwd_fn: Callable[[], str]):
         self._mark_name: Union[str, None] = None
         self._directory: Union[Path, None] = None
+        self._get_cwd_fn = cwd_fn
 
     @property
     def mark_name(self) -> str:
@@ -19,6 +21,9 @@ class Input:
     def directory(self) -> Path:
         return self._directory
 
-    @directory.setter
-    def directory(self, directory_path: str):
-        self._directory = Path(directory_path)
+    def read_cwd(self):
+        self._directory = Path(getcwd())
+
+
+def get_input() -> Input:
+    return Input(cwd_fn=getcwd)

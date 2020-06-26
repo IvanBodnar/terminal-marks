@@ -2,7 +2,7 @@ from pathlib import Path
 from typing import Union
 
 
-class Mark:
+class Input:
     def __init__(self):
         self._mark_name: Union[str, None] = None
         self._directory: Union[Path, None] = None
